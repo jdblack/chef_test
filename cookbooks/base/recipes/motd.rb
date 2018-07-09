@@ -1,4 +1,5 @@
 
+puts "Roles are: #{node['roles']}"
 template "/etc/motd" do
   variables({
     greeting: node['greeting'],
