@@ -4,7 +4,7 @@
   "json_class": "Chef::Role",
   "default_attributes": {
     "greeting": "I am a tool",
-    "poc": "Base Infrastructure Team"
+    "poc": "Utility Team"
   },
   "override_attributes": {
 
