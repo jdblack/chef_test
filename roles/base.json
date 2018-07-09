@@ -6,7 +6,7 @@
 
   },
   "override_attributes": {
-
+    "greeting": "All your base are belong to us"
   },
   "chef_type": "role",
   "run_list": [

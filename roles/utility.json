@@ -3,7 +3,7 @@
   "description": "Base role",
   "json_class": "Chef::Role",
   "default_attributes": {
-    "greeting": "All your data[base] are belong to us"
+    "greeting": "I am a tool"
   },
   "override_attributes": {
 

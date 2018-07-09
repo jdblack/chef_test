@@ -1,4 +1,3 @@
-
 template "/etc/motd" do
   variables({
     greeting: node['greeting'],
