@@ -1,5 +1,5 @@
 {
-  "name": "dbserver",
+  "name": "utility",
   "description": "Base role",
   "json_class": "Chef::Role",
   "default_attributes": {
