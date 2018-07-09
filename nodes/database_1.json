@@ -4,6 +4,7 @@
 			"role[dbserver]"
 		],
 		"automatic": {
+      "roles": [ "base","dbserver" ],
 			"ohai_time": 1531122011.7118952
 
 		}

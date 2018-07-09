@@ -4,7 +4,7 @@
 			"role[webserver]"
 		],
 		"automatic": {
-
+      "roles": [ "base","webserver" ],
 			"ohai_time": 1531144011.7118952
 
 		}
