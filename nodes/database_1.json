@@ -1,0 +1,11 @@
+{
+	"name": "database_1",
+		"run_list": [
+			"role[dbserver]"
+		],
+		"automatic": {
+			"ohai_time": 1531122011.7118952
+
+		}
+
+}

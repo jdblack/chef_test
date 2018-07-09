@@ -1,0 +1,12 @@
+{
+	"name": "webserver_2",
+		"run_list": [
+			"role[webserver]"
+		],
+		"automatic": {
+
+			"ohai_time": 1531244011.7118952
+
+		}
+
+}
