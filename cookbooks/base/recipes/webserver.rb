@@ -8,11 +8,11 @@ end
 
 
 execute "index.html" do
- command "echo '<html><body>Howdy!</body></html>' > /var/www/html.index.html"
+ command "echo '<html><body>Howdy!</body></html>' > /var/www/html/index.html"
 end
 
 execute "restart nginx" do
-  command "service nginx restart"
+  command "systemd start nginx;  systemd enable nginx"
 end
 
 
