@@ -3,6 +3,7 @@
   "description": "Base role",
   "json_class": "Chef::Role",
   "default_attributes": {
+    "poc": "Base Infrastructure Team"
 
   },
   "override_attributes": {

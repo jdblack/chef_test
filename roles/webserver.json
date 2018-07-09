@@ -3,7 +3,8 @@
   "description": "Base role",
   "json_class": "Chef::Role",
   "default_attributes": {
-    "greeting": "Totally web scale"
+    "greeting": "Totally web scale",
+    "poc": "Spiderman"
   },
   "override_attributes": {
 

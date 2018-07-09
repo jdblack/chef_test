@@ -3,7 +3,8 @@
   "description": "Base role",
   "json_class": "Chef::Role",
   "default_attributes": {
-    "greeting": "All your data[base] are belong to us"
+    "greeting": "All your data[base] are belong to us",
+    "poc": "Database Team"
   },
   "override_attributes": {
 
