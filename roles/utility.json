@@ -3,7 +3,7 @@
   "description": "Base role",
   "json_class": "Chef::Role",
   "default_attributes": {
-    "greeting": "I am a tool",
+    "greeting": "I am a utility box",
     "poc": "Utility Team"
   },
   "override_attributes": {
@@ -11,7 +11,8 @@
   },
   "chef_type": "role",
   "run_list": [
-    "role[base]"
+    "role[base]",
+    "recipe[base::webserver]"
   ],
   "env_run_lists": {
 
