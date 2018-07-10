@@ -12,7 +12,7 @@ execute "index.html" do
 end
 
 execute "restart nginx" do
-  command "systemd start nginx;  systemd enable nginx"
+  command "systemctl start nginx;  systemctl enable nginx"
 end
 
 
