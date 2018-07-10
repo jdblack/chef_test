@@ -1,0 +1,88 @@
+#!/bin/bash
+TEST_USER=${1:-chef_test}
+
+
+DKPATH=packages.chef.io/files/stable/chefdk/3.1.0/ubuntu/16.04/
+DKPKG=chefdk_3.1.0-1_amd64.deb
+REPO='https://github.com/jdblack/chef_test.git'
+
+if [[ $EUID -ne 0 ]]; then
+  sudo $$#
+  exit 1
+fi
+
+
+main () {
+  setup_dependencies
+  reset $TEST_USER
+  install_chef
+  setup_user $TEST_USER
+  setup_chef $TEST_USER
+}
+
+reset () {
+  if [ "$#" -ne 1 ]; then
+    echo "reset: Must pass user name"
+    exit 1
+  fi
+  apt purge nginx -y
+  rm /var/www/html/*
+  rm -rf /var/chef/cache/*
+  rm -rf /home/$1/.chef
+  rm -rf /etc/chef
+  killall chef-zero
+}
+
+install_chef () {
+  if [ ! -f /tmp/$DKPKG ]; then
+    wget https://$DKPATH/$DKPKG -O /tmp/$DKPKG
+    sudo dpkg -i /tmp/$DKPKG
+  fi
+  gem install chef-zero -v 13
+  chef-zero -d
+}
+
+setup_chef () {
+  if [ "$#" -ne 1 ]; then
+    echo "reset: Must pass user name"
+    exit 1
+  fi
+  mkdir /etc/chef
+  cp -a /home/$1/.chef/knife.pem  /etc/chef/validation.pem
+  cat > /etc/chef/client.rb << EOF
+node_name "chef_test"
+chef_server_url 'http://localhost:8889'
+EOF
+  su $TEST_USER -c "knife upload /"
+  rm -rf /home/$1/chef
+  mkdir /home/$1/chef
+  chown $1.$1 /home/$1/chef
+  chef-client -r 'role[utility]'
+}
+setup_user () {
+  if [ "$#" -ne 1 ]; then
+    echo "reset: Must pass user name"
+    exit 1
+  fi
+  rm -rf /home/$1/chef
+  git clone $REPO /home/$1/chef
+  mkdir /home/$1/.chef
+  cat > /home/$1/.chef/knife.rb <<EOF
+chef_server_url 'http://localhost:8889'
+node_name '$1'
+client_key '/home/$1/.chef/knife.pem'
+cookbook_path ["/home/$1/chef/cookbooks"]
+EOF
+
+echo "export EDITOR=vim" >> /home/$1/.bashrc
+ssh-keygen -f /home/$1/.chef/knife.pem -N ''
+chown -R $1.$1 /home/$1/.chef 
+}
+
+setup_dependencies () {
+  apt -y install ruby-dev  build-essential
+}
+
+
+main
+
