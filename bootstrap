@@ -74,7 +74,6 @@ client_key '/home/$1/.chef/knife.pem'
 cookbook_path ["/home/$1/chef/cookbooks"]
 EOF
 
-echo "export EDITOR=vim" >> /home/$1/.bashrc
 ssh-keygen -f /home/$1/.chef/knife.pem -N ''
 chown -R $1.$1 /home/$1/.chef 
 }
